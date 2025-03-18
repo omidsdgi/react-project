@@ -1,10 +1,17 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-function AccordionItem({ title, content, isOpen, onClick }) {
+interface AccordionItemProps {
+    title: string;
+    content: string;
+    isOpen: boolean;
+    onClick: () => void;
+}
+
+function AccordionItem({ title, content, isOpen, onClick }:AccordionItemProps) {
     return (
         <div className="border border-r-gray-500 rounded-lg shadow-md">
             <button
-                className="w-full flex justify-between items-center p-3 bg-gray-100 hover:bg-gray-200"
+                className="w-full flex justify-between text-black items-center p-3 bg-gray-100 hover:bg-gray-200"
                 onClick={onClick}
             >
                 <span className="font-medium">{title}</span>

@@ -34,7 +34,7 @@ export default function Home() {
               <h2 className="text-xl font-bold mt-5 text-right">گروه ۲</h2>
               <Accordion items={itemsGroup2}/>
           </div>
-          <div className="p-5 space-y-10">
+          <div className="p-5 space-y-10 text-black">
               {[
                   {title: "گروه ۳", items: itemsGroup1},
                   {title: "گروه ۴", items: itemsGroup2},

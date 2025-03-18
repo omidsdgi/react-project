@@ -1,11 +1,17 @@
 import {useState} from "react";
 import AccordionItem from "@/components/AccordionItem";
 
+interface AccordionProps {
+    items: {
+        title: string;
+        content: string;
+    }[];
+}
 
-function Accordion({items}) {
-    const [openIndex, setOpenIndex] = useState(null);
+function Accordion({items}: AccordionProps) {
+    const [openIndex, setOpenIndex] = useState<number|null>(null);
 
-    const toggleAccordion = (index) => {
+    const toggleAccordion = (index:number) => {
         setOpenIndex(openIndex === index ? null : index);
     }
     return (
@@ -22,5 +28,5 @@ function Accordion({items}) {
         </div>
     );
     }
-
     export default Accordion;
+
