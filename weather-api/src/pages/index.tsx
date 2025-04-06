@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <div    >
             <main >
-                <Weather/>
+                <Weather city={"tehran"}/>
             </main>
         </div>
     );
