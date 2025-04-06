@@ -2,9 +2,11 @@ import SearchForm from "@/components/weather/SearchForm";
 import ForecastList from "@/components/weather/ForecastList";
 import WeatherInfo from "@/components/weather/WeatherInfo";
 import {useState} from "react";
-import {callWeatherApi} from "@/api/Api";
+import {callForecastApi, callWeatherApi} from "@/api/Api";
 import {WeatherResponse} from "@/types/api/WeatherResponse";
+import {ForecastResponse} from "@/types/api/ForecastResponse";
 import Image from "next/image";
+import ForecastItem from "@/components/weather/ForecastItem";
 interface Props {
     city: string;
 }
@@ -19,6 +21,7 @@ function Weather({city}:Props) {
         daily:[]
 
     })
+    const [forecastState, setForecastState] = useState<ForecastResponse| null>(null)
     const getWeatherData=async (city:string)=>{
          const response:WeatherResponse= await callWeatherApi({city})
 
@@ -31,8 +34,9 @@ function Weather({city}:Props) {
             daily:[]
 
         }
-
-    setWeatherState(weather);
+        setWeatherState(weather);
+    const forecastResponse= await callForecastApi({lat:response.coord.lat,lon:response.coord.lon});
+    setForecastState(forecastResponse);
     }
     if(weatherState.city.length === 0){
         getWeatherData(city)
@@ -44,7 +48,10 @@ function Weather({city}:Props) {
             <div className={"bg-white shadow mt-4 rounded-2xl p-8 py-16 w-[750px] h-auto"}>
             <SearchForm city={city} getWeatherData={getWeatherData} />
             <WeatherInfo weather={weatherState}/>
-            <ForecastList/>
+                {
+                    forecastState && <ForecastList forecast={forecastState}/>
+
+                }
         </div>
         </div>
     );
