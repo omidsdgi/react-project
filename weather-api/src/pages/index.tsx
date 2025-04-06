@@ -1,13 +1,12 @@
-
-
+import Weather from "@/components/weather/Weather";
 
 
 export default function Home() {
-  return (
-    <div    >
-      <main >
-omid
-      </main>
-    </div>
-  );
+    return (
+        <div    >
+            <main >
+                <Weather/>
+            </main>
+        </div>
+    );
 }
