@@ -12,7 +12,7 @@ function WeatherInfo({weather}:Props){
                 <div>Humidity: <span className={"text-primary"}> {weather.humidity}</span> Wind: <span
                     className={"text-primary"}>{weather.wind} Km/h</span></div>
             </div>
-            <div>
+            <div  className={"flex justify-end "}>
                 <WeatherIcon size={56} icon={weather.icon} />
             </div>
         </div>

@@ -1,7 +1,7 @@
 import SearchForm from "@/components/weather/SearchForm";
 import ForecastList from "@/components/weather/ForecastList";
 import WeatherInfo from "@/components/weather/WeatherInfo";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {callForecastApi, callWeatherApi} from "@/api/Api";
 import {WeatherResponse} from "@/types/api/WeatherResponse";
 import {ForecastResponse} from "@/types/api/ForecastResponse";
@@ -12,6 +12,7 @@ interface Props {
 }
 
 function Weather({city}:Props) {
+    const [cityState, setCityState] = useState(city)
     const [weatherState, setWeatherState] = useState<Weather>({
         city: "",
         wind:0,
@@ -22,8 +23,8 @@ function Weather({city}:Props) {
 
     })
     const [forecastState, setForecastState] = useState<ForecastResponse| null>(null)
-    const getWeatherData=async (city:string)=>{
-         const response:WeatherResponse= await callWeatherApi({city})
+    const getWeatherData=async ()=>{
+         const response:WeatherResponse= await callWeatherApi({city:cityState})
 
         const weather:Weather={
              city:response.name,
@@ -38,15 +39,18 @@ function Weather({city}:Props) {
     const forecastResponse= await callForecastApi({lat:response.coord.lat,lon:response.coord.lon});
     setForecastState(forecastResponse);
     }
-    if(weatherState.city.length === 0){
-        getWeatherData(city)
-    }
+    // if(weatherState.city.length === 0){
+    // }
+    useEffect(() => {
+        getWeatherData()
+
+    }, [cityState]);
 
     return (
         <div className={"flex  flex-col items-center "}>
             <Image src={"logoNavax.svg"} alt={"Navax collage"} width={86} height={46}/>
             <div className={"bg-white shadow mt-4 rounded-2xl p-8 py-16 w-[750px] h-auto"}>
-            <SearchForm city={city} getWeatherData={getWeatherData} />
+            <SearchForm city={cityState} setCityState={setCityState} />
             <WeatherInfo weather={weatherState}/>
                 {
                     forecastState && <ForecastList forecast={forecastState}/>
