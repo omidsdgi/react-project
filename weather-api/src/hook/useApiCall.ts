@@ -1,26 +1,24 @@
-import {callWeatherApi} from "@/api/Api";
 import {useEffect, useState} from "react";
 import {WeatherResponse} from "@/types/api/WeatherResponse";
 import ApiStatus from "@/types/api/ApiStatus";
+import {callWeatherApi} from "@/api/Api";
 
-interface Props {
-    city: string;
+interface Props <T,S>{
+    func:(arg:T)=>Promise<S| false>;
+    params:T
+    refresh?:Array<any>
+    enabled?: boolean;
 }
-interface WeatherResult {
-    status:"pending"| "isLoading"|"hasError"|"isSuccesses"
-    response: WeatherResponse | false;
-}
+export default function useApiCall<S,T>({func,params,refresh=[],enabled=true}:Props<T,S>) {
 
-export default function  useWeatherApi({city}:Props):WeatherResult {
-
-    const [response, setResponse] = useState<WeatherResponse | false>(false)
+    const [response, setResponse] = useState<S | false>(false)
 
     const [status, setStatus] = useState<ApiStatus>("pending");
 
     const apiCall = async () => {
         setStatus("isLoading");
 
-        const result= await callWeatherApi({city})
+        const result= await func(params)
 
 
         if(result === false){
@@ -33,8 +31,9 @@ export default function  useWeatherApi({city}:Props):WeatherResult {
     }
 
     useEffect(() => {
-
-        apiCall()
-    }, [city]);
+        if(enabled)
+            apiCall()
+    }, refresh);
     return{status,response}
 }
+

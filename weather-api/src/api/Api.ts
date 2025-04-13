@@ -1,16 +1,11 @@
 import {WeatherResponse} from "@/types/api/WeatherResponse";
 import {ForecastResponse} from "@/types/api/ForecastResponse";
+import {ForecastProps, WeatherProps} from "@/types/api/FetcherProps";
 
 const baseUrl=`https://api.openweathermap.org/data/2.5/`
 const apiKey="3dce9b1c66837262a25b3f448d354a76"
 
-interface WeatherProps {
-    city: string;
-}
-interface ForecastProps {
-    lat:number,
-    lon:number,
-}
+
 
 export async function callWeatherApi({city}:WeatherProps):Promise<WeatherResponse| false> {
     await sleep(2000)

@@ -6,9 +6,10 @@ import {WeatherResponse} from "@/types/api/WeatherResponse";
 import {ForecastResponse} from "@/types/api/ForecastResponse";
 import Image from "next/image";
 import ForecastItem from "@/components/weather/ForecastItem";
-import useWeatherApi from "@/hook/useWeatherApi";
-import useForecastApi from "@/hook/useForecastApi";
 import ApiLoader from "@/components/share/ApiLoader/ApiLoader";
+import useApiCall from "@/hook/useApiCall";
+import {callForecastApi, callWeatherApi} from "@/api/Api";
+import {ForecastProps, WeatherProps} from "@/types/api/FetcherProps";
 interface Props {
     city: string;
 }
@@ -18,8 +19,13 @@ function Weather({city}:Props) {
     const [cityState, setCityState] = useState(city)
     const [coord, setCoord] = useState({lat:0,lon:0})
 
-    const {status,response}= useWeatherApi({city:cityState})
-    const {status:ForecastStatus,response:ForecastResponse}= useForecastApi(coord)
+    const {status,response}= useApiCall<WeatherResponse,WeatherProps>({func:callWeatherApi,params:{city:cityState},refresh:[cityState]})
+    const {status:ForecastStatus,response:ForecastResponse}= useApiCall<ForecastResponse,ForecastProps>({
+        func:callForecastApi,
+        params:coord,
+        refresh:[coord],
+        enabled:(coord.lon !=0 && coord.lat !=0)
+    })
 
     useEffect(() => {
         if(response){
