@@ -12,13 +12,23 @@ interface ForecastProps {
     lon:number,
 }
 
-export async function callWeatherApi({city}:WeatherProps):Promise<WeatherResponse> {
-    const response= await fetch(baseUrl +`weather?q=${city}&appid=${apiKey}&units=metric`)
-
-    return await response.json()
+export async function callWeatherApi({city}:WeatherProps):Promise<WeatherResponse| false> {
+    await sleep(2000)
+    const response = await fetch(baseUrl + `weather?q=${city}&appid=${apiKey}&units=metric`)
+    if (response.ok) {
+        return await response.json()
+    } else {
+        return false
+    }
 }
 
-export async function callForecastApi({lat,lon}:ForecastProps):Promise<ForecastResponse> {
+export async function callForecastApi({lat,lon}:ForecastProps):Promise<ForecastResponse |false> {
+    await sleep(5000)
     const response=await fetch(baseUrl +`forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
-    return await response.json()
+    if(response.ok){
+        return await response.json()
+    }else{
+        return false
 }
+}
+const sleep=(ms:number) => new Promise(resolve => setTimeout(resolve, ms));
