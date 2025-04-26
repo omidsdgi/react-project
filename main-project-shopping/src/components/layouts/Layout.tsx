@@ -1,12 +1,12 @@
 import {ReactNode} from "react";
-import Header from "@/components/layouts/header/Header";
-import Footer from "@/components/layouts/footer/Footer";
+import {Footer} from "@/components";
+import {Header} from "@/components";
 
 interface Props {
     children: ReactNode;
 }
 
-function Layout({children}:Props) {
+export function Layout({children}:Props) {
     return (
         <>
             <Header />
@@ -16,4 +16,3 @@ function Layout({children}:Props) {
     );
 }
 
-export default Layout;
