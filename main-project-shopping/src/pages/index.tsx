@@ -1,7 +1,6 @@
 
 
 export default function Home() {
-  return (
-    <>This is index page.</>
+  return (<div>OMid </div>
   )
 }
