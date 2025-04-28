@@ -10,10 +10,10 @@ export function Header() {
 
                 <ul className="hidden lg:flex gap-5">
                     <li className="flex gap-2 cursor-pointer">
-                        <IconBox linkClassName={"flex item-center"} icon={"icon-user"} size={24} title={"Account"} link={"#"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato ml-1"} path={7}/>
+                        <IconBox linkClassName={"flex item-center"} icon={"icon-user"} size={24} title={"Account"} link={"#"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato "} path={7}/>
                     </li>
                     <li className="flex gap-2 cursor-pointer">
-                        <IconBox linkClassName={"flex item-center"} icon={"icon-shopping-cart"} size={24} title={"Card"} link={"#"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato ml-1"} badge={4}/>
+                        <IconBox linkClassName={"flex item-center"} icon={"icon-shopping-cart"} size={24} title={"Card"} link={"#"} hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato "} badge={4}/>
                     </li>
                 </ul>
                 <button id="menu_btn" className="flex flex-col justify-between py-[4px] lg:hidden w-[24px] h-[24px]">
