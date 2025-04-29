@@ -1,6 +1,17 @@
+import {Banner, Section} from "@/components";
+import {twMerge} from "tailwind-merge";
 
 
 export default function Home() {
-  return (<div>OMid </div>
+  return (
+      <>
+      <Section>
+        <Banner  title={"Don’t miss amazing grocery deals"}
+                  subtitle={"Sign up for the daily newsletter"}
+                  image={"/assets/images/fresh-apples.png"}
+                  bgImage={"/assets/images/banner_bg.png"}/>
+
+      </Section>
+      </>
   )
 }

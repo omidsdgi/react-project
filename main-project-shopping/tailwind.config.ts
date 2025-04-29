@@ -16,10 +16,13 @@ export default {
         c: '14px 14px 36px 0px rgba(85, 85, 85, 0.1)',
         'c-lg': '14px 14px 36px 0px rgba(85, 85, 85, 0.22)'
       },
+    /* backgroundImage:{
+        'hero-pattern': "url('../../images/banner_bg.png')",
+        'hero-img': "url('../../images/hero_img.png')"
+      },*/
 
       fontFamily: {
-        quickSand: ['Quicksand', 'sans-serif'],
-        lato: ['Lato', 'sans-serif']
+        lato: ['var( --font-lato)']
       },
       fontSize: {
         display1: [

@@ -1,17 +1,17 @@
 import Image from "next/image";
 
 interface Props {
-    src: string;
-    alt: string;
-    height: number;
-    width: number;
-    classname?: string;
+    src: string,
+    alt: string,
+    height: number,
+    width: number,
+    className?: string
 }
 
-export function ImageView({src,alt,width,height,classname=''}:Props){
+export function ImageView({src, alt, width, height, className = ''}: Props) {
 
     return (
-        <Image className={classname} src={src} alt={alt} width={width} height={height} />
+        <Image className={className} src={src} alt={alt} width={width} height={height}/>
     );
 }
 
