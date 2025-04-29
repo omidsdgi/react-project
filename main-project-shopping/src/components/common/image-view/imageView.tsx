@@ -5,7 +5,7 @@ interface Props {
     alt: string,
     height: number,
     width: number,
-    className?: string
+    className?: string,
 }
 
 export function ImageView({src, alt, width, height, className = ''}: Props) {

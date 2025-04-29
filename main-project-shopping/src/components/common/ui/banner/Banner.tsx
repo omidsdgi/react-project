@@ -5,7 +5,7 @@ interface Props {
     subtitle:string,
    bgImage:string,
     image:string,
-};
+}
 
 export function Banner({title,subtitle,bgImage,image}: Props) {
 //TODO implement form
@@ -37,4 +37,4 @@ export function Banner({title,subtitle,bgImage,image}: Props) {
             </form>
         </>
     );
-};
+}
