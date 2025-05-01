@@ -1,4 +1,3 @@
-import {link} from "node:fs";
 
 export const featureCategoriesMock = [
     {

@@ -20,22 +20,41 @@ export function IconBox({icon,size=22,link,title,hideTitleOnMobile=true,badge=0,
         span.push(<span className={`path${i}`}></span> )
     }
 
-    return (
-        <Link className={`flex items-center cursor-pointer ${linkClassName}`} href={link ?? '#'}>
+    if (link){
+        return (
+            <Link className={`flex items-center cursor-pointer ${linkClassName}`} href={link ?? '#'}>
 
-            {badge ?
-                <div className="relative">
+                {badge ?
+                    <div className="relative">
                 <span
                     className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">{badge}</span>
-                   <i className={`${icon} text-[${size}px]`}>{span}</i>
-                </div>
-                :
-              <i className={`${icon} text-[${size}px]`}>{span}</i>
+                        <i className={`${icon} text-[${size}px]`}>{span}</i>
+                    </div>
+                    :
+                    <i className={`${icon} text-[${size}px]`}>{span}</i>
                 }
-            {title && <div className={`ml-1 ${hideTitleOnMobile ? 'hidden lg:inline-block' :'inline-block'} ${titleClassName}`}>{title}</div>
-            }
-        </Link>
+                {title && <div className={`ml-1 ${hideTitleOnMobile ? 'hidden lg:inline-block' :'inline-block'} ${titleClassName}`}>{title}</div>
+                }
+            </Link>
 
-    );
+        );
+    }else {
+        return(
+            <>
+                {
+                    badge ?
+                        <div className="relative">
+                <span
+                    className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">{badge}</span>
+                            <i className={`${icon} text-[${size}px]`}>{span}</i>
+                        </div>
+                        :
+                        <i className={`${icon} text-[${size}px]`}>{span}</i>
+                }
+                {title && <div className={`ml-1 ${hideTitleOnMobile ? 'hidden lg:inline-block' :'inline-block'} ${titleClassName}`}>{title}</div>
+                }
+            </>
+        )
+    }
 }
 
