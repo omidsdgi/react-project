@@ -1,6 +1,6 @@
 import {
     Banner,
-    BestSellerSlider,
+    BestSellerSlider, BottomSlider,
     DealsOfTheDaysSlider,
     IconBox,
     MiniProductSlider,
@@ -89,6 +89,10 @@ export default function Home() {
                     </Link>
                 </div>
                 <DealsOfTheDaysSlider sliderData={DealsOfTheDaysMock}/>
+            </Section>
+
+            <Section>
+                <BottomSlider/>
             </Section>
         </>
     )
