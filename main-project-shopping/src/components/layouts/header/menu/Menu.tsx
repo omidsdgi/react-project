@@ -2,7 +2,7 @@ import Link from "next/link";
 import {IconBox} from "@/components";
 import {EntityType, MenuItemType} from "@/types";
 import {useMenu} from "@/hooks/use-menu";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState,MouseEvent} from "react";
 
 export function Menu() {
     const [showCategoryMenu, setShowCategoryMenu] = useState<boolean>(false)
@@ -10,11 +10,11 @@ export function Menu() {
     const {data:mainMenuItems}=useMenu({position:'main_menu'});
     const {data:categoryMenuItems}=useMenu({position:'brows-category'});
 
-    const categoryBtnClickHandler=(e:React.MouseEvent<HTMLDivElement>)=>{
+    const categoryBtnClickHandler=(e:MouseEvent)=>{
         e.stopPropagation();
         setShowCategoryMenu((prevState)=>!prevState)
     }
-    const categoryBodyClickHandler=(e:React.MouseEvent<HTMLDivElement>)=>{
+    const categoryBodyClickHandler=(e:MouseEvent)=>{
         e.stopPropagation()
     }
 

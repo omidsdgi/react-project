@@ -13,7 +13,7 @@ interface Props {
 
 }
 
-export function IconBox({icon,size=22,link,title,hideTitleOnMobile=true,badge=0,titleClassName='',path=0,linkClassName=''}: Props) {
+export function IconBox({icon,size=22,link,title,hideTitleOnMobile=false,badge=0,titleClassName='',path=0,linkClassName=''}: Props) {
     let span=[]
 
     for (let i=1; i<=path; i++){
