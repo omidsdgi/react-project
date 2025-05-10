@@ -3,9 +3,11 @@ import {Autoplay, Navigation} from "swiper/modules";
 import {miniProductSlider} from "@/mock/miniProductSlider";
 import Link from "next/link";
 import {SimpleProductCard} from "@/components";
+import {EntityType} from "@/types";
+import {ProductType} from "@/types/api/Product";
 
 interface Props {
- sliderData:Array<any>;
+ sliderData:Array<EntityType<ProductType>>;
  nextEl?:string;
  prevEl?:string;
 }

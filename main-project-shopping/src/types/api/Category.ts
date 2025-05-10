@@ -1,7 +1,7 @@
 import {EntityType} from "@/types";
 import {ImageType} from "@/types/api/image";
 
-export interface CategoryTpye {
+export interface CategoryType {
     title: string
     description: any
     slug: string

@@ -32,7 +32,7 @@ export function Menu() {
         <>
             <div className="relative">
                 <div  onClick={categoryBtnClickHandler}
-                      className="flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center">
+                      className=" flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center">
                     <IconBox icon={"icon-apps"} size={24} title={"Browse All Categories"} link={"#"} titleClassName={"text-medium "}/>
                     <IconBox icon={"icon-angle-small-down"} size={24} />
                 </div>

@@ -3,13 +3,10 @@ export interface ApiResponseType<T> {
     data: EntityType<T>[]
     meta: MetaType
 }
-
 export interface EntityType<T> {
     id: number
     attributes: T
 }
-
-
 export interface PopulateType<T> {
     data: Array<EntityType<T>>
 }

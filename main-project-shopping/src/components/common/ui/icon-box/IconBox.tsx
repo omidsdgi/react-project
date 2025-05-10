@@ -17,7 +17,7 @@ export function IconBox({icon,size=22,link,title,hideTitleOnMobile=false,badge=0
     let span=[]
 
     for (let i=1; i<=path; i++){
-        span.push(<span className={`path${i}`}></span> )
+        span.push(<span  key={i} className={`path${i}`}></span> )
     }
 
     if (link){

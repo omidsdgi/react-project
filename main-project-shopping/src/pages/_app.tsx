@@ -10,8 +10,9 @@ import type { AppProps } from "next/app";
 import {Layout} from "@/components";
 import {Lato, Quicksand} from "next/font/google";
 import {NEXT_RSC_UNION_QUERY} from "next/dist/client/components/app-router-headers";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {HydrationBoundary, QueryClient, QueryClientProvider, useQuery} from "@tanstack/react-query";
 import {ToastContainer} from "react-toastify";
+import {useState} from "react";
 
 const quicksand=Quicksand({
     subsets:['latin']
@@ -25,15 +26,16 @@ const lato=Lato({
 })
 
 export default function App({ Component, pageProps }: AppProps) {
-    const queryClient = new QueryClient({
+    const [queryClient] = useState(()=>new QueryClient({
         defaultOptions: {
             queries: {
                 refetchOnWindowFocus: false,
                 refetchIntervalInBackground: false,
-                retry:0
+                retry:0,
+                staleTime:60*1000
             }
         }
-    })
+    }))
 
     return (
         <>
@@ -43,10 +45,12 @@ export default function App({ Component, pageProps }: AppProps) {
                     --font-lato:${lato.style.fontFamily},sans-serif;
                 }`}</style>
             <QueryClientProvider client={queryClient}>
-                <Layout>
-                    <Component {...pageProps} />
-                <ToastContainer autoClose={10000} hideProgressBar={true} draggable={false} position={"top-right"} theme={"light"} closeOnClick={true}/>
-                </Layout>
+                <HydrationBoundary state={pageProps.dehydratedState}>
+                    <Layout>
+                        <Component {...pageProps} />
+                        <ToastContainer autoClose={10000} hideProgressBar={true} draggable={false} position={"top-right"} theme={"light"} closeOnClick={true}/>
+                    </Layout>
+                </HydrationBoundary>
             </QueryClientProvider>
         </>
     )
