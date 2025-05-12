@@ -1,9 +1,14 @@
 import Link from "next/link";
 import {IconBox, Logo, Menu, SearchForm} from "@/components";
-import React, {useEffect, useState,MouseEvent} from "react";
+import React, {useEffect, useState, MouseEvent} from "react";
+import {LoginModal} from "@/components/common/auth/LoginModal";
+import {RegisterModal} from "@/components/common/auth/RegisterModal";
+import { useModal} from "@/store";
 
 export function Header() {
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+
+    const {currentModal,openModal,closeModal} = useModal();
 
     const menuBtnClickHandler=(e:MouseEvent)=>{
         e.stopPropagation();
@@ -21,8 +26,13 @@ export function Header() {
         return ()=>{document.removeEventListener('click',clickHandler)}
     }, []);
 
+
+
     return (
         <header className="mb-[33px]">
+            {currentModal === 'login' && <LoginModal onClose={closeModal}/>}
+            {currentModal === 'register' && <RegisterModal onClose={closeModal}/>}
+
             <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
                 <Logo/>
                 <div
@@ -31,7 +41,7 @@ export function Header() {
                 </div>
 
                     <ul className="hidden lg:flex gap-5">
-                        <li className="flex gap-2 cursor-pointer">
+                        <li className="flex gap-2 cursor-pointer " onClick={()=>openModal('login')}>
                             <IconBox icon={"icon-user"} size={24} title={"Account"} link={"#"} hideTitleOnMobile={true}
                                      titleClassName={"text-medium text-gray-500 font-lato "} path={7}/>
                         </li>

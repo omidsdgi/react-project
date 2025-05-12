@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import type { AppProps } from "next/app";
 import {Layout} from "@/components";
 import {Lato, Quicksand} from "next/font/google";
-import {NEXT_RSC_UNION_QUERY} from "next/dist/client/components/app-router-headers";
 import {HydrationBoundary, QueryClient, QueryClientProvider, useQuery} from "@tanstack/react-query";
 import {ToastContainer} from "react-toastify";
-import {useState} from "react";
+import React, {useState} from "react";
+import {ModalContextProvider} from "@/store";
 
 const quicksand=Quicksand({
     subsets:['latin']
@@ -46,10 +46,13 @@ export default function App({ Component, pageProps }: AppProps) {
                 }`}</style>
             <QueryClientProvider client={queryClient}>
                 <HydrationBoundary state={pageProps.dehydratedState}>
+                    <ModalContextProvider>
+                    <div id={'portal'}></div>
                     <Layout>
                         <Component {...pageProps} />
                         <ToastContainer autoClose={10000} hideProgressBar={true} draggable={false} position={"top-right"} theme={"light"} closeOnClick={true}/>
                     </Layout>
+                    </ModalContextProvider>
                 </HydrationBoundary>
             </QueryClientProvider>
         </>
