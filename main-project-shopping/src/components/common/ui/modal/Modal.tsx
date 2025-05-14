@@ -11,7 +11,7 @@ export function Modal({children,title,closeModal}: Props) {
     return (
         <Portal onClose={closeModal}>
             <div
-                className={'z-10 min-w-[100vw] md:min-w-[50vw] min-h-[100vh] md:min-h-[50vh]  border-2 overflow-scroll bg-gray-300 '}>
+                className={'z-10 min-w-[100vw] md:min-w-[50vw] min-h-[100vh] md:min-h-[50vh]  border-2 overflow-auto bg-gray-300 '}>
                 <div className={'flex justify-between rounded bg-white p-8 text-[22px]'}>
 
 
