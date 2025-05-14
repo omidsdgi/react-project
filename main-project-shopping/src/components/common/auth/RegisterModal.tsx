@@ -4,6 +4,9 @@ import {useForm} from "react-hook-form";
 import {Input} from "@/components";
 import {useMutation} from "@tanstack/react-query";
 import {registerApiCall} from "@/api/Auth";
+import {useUser} from "@/store/AuthContext";
+import {toast} from "react-toastify";
+import {useModal} from "@/store";
 
 interface FormData {
     userName: string;
@@ -15,7 +18,9 @@ interface Props {
     onClose: () => void
 }
 
-export function RegisterModal({onClose}: Props) {
+export function RegisterModal({onClose,}: Props) {
+    const {closeModal} = useModal();
+    const {login}=useUser()
 
     const {register,handleSubmit,formState:{errors}}=useForm<FormData>()
 
@@ -23,7 +28,9 @@ export function RegisterModal({onClose}: Props) {
 
     const onSubmit=(data:FormData)=>{
         mutate.mutate(data, {onSuccess:(response)=>{
-                console.log('response',response)
+                login(response.jwt, response.user)
+                toast.success('با موفقیت وارد حساب کاربری خود شدید')
+                closeModal()
             }})
 
     }

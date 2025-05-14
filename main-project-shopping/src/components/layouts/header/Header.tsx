@@ -4,8 +4,11 @@ import React, {useEffect, useState, MouseEvent} from "react";
 import {LoginModal} from "@/components/common/auth/LoginModal";
 import {RegisterModal} from "@/components/common/auth/RegisterModal";
 import { useModal} from "@/store";
+import {useUser} from "@/store/AuthContext";
+import {toast} from "react-toastify";
 
 export function Header() {
+    const{isLogin, logout}=useUser()
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 
     const {currentModal,openModal,closeModal} = useModal();
@@ -26,6 +29,14 @@ export function Header() {
         return ()=>{document.removeEventListener('click',clickHandler)}
     }, []);
 
+    const accountHandler=()=>{
+        if (isLogin){
+            logout();
+            toast.success('شما با موفقیت خارج شدید')
+        }else{
+            openModal('login')
+        }
+    }
 
 
     return (
@@ -41,8 +52,8 @@ export function Header() {
                 </div>
 
                     <ul className="hidden lg:flex gap-5">
-                        <li className="flex gap-2 cursor-pointer " onClick={()=>openModal('login')}>
-                            <IconBox icon={"icon-user"} size={24} title={"Account"} link={"#"} hideTitleOnMobile={true}
+                        <li className="flex gap-2 cursor-pointer " onClick={accountHandler}>
+                            <IconBox icon={"icon-user"} size={24} title={`${isLogin ?'Logout' : 'Login/Register'}`} link={"#"} hideTitleOnMobile={true}
                                      titleClassName={"text-medium text-gray-500 font-lato "} path={7}/>
                         </li>
                         <li className="flex gap-2 cursor-pointer">

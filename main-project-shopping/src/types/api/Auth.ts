@@ -1,8 +1,8 @@
-export interface RegisterResponseType {
+export interface AuthResponseType {
     jwt: string;
-    user:User
+    user:UserType
 }
-export interface User {
+export interface UserType {
     id: string;
     username: string;
     email: string;
