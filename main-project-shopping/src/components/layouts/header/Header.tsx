@@ -1,15 +1,17 @@
 import Link from "next/link";
 import {IconBox, Logo, Menu, SearchForm} from "@/components";
-import React, {useEffect, useState, MouseEvent} from "react";
+import React, {useEffect, useState, MouseEvent, useContext} from "react";
 import {LoginModal} from "@/components/common/auth/LoginModal";
 import {RegisterModal} from "@/components/common/auth/RegisterModal";
 import { useModal} from "@/store";
 import {useUser} from "@/store/AuthContext";
 import {toast} from "react-toastify";
+import {BasketContext} from "@/store/basketContext";
 
 export function Header() {
     const{isLogin, logout}=useUser()
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+    const basket=useContext(BasketContext);
 
     const {currentModal,openModal,closeModal} = useModal();
 
@@ -59,7 +61,7 @@ export function Header() {
                         <li className="flex gap-2 cursor-pointer">
                             <IconBox icon={"icon-shopping-cart"} size={24} title={"Card"} link={"#"}
                                      hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato "}
-                                     badge={4}/>
+                                     badge={basket.basketItems.length}/>
                         </li>
                     </ul>
                     <button onClick={menuBtnClickHandler} id="menu_btn"

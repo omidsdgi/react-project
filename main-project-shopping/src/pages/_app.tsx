@@ -14,6 +14,7 @@ import {ToastContainer} from "react-toastify";
 import React, {useState} from "react";
 import {ModalContextProvider} from "@/store";
 import {AuthContextProvider} from "@/store/AuthContext";
+import {BasketContextProvider} from "@/store/basketContext";
 
 const quicksand=Quicksand({
     subsets:['latin']
@@ -46,17 +47,19 @@ export default function App({ Component, pageProps }: AppProps) {
                     --font-lato:${lato.style.fontFamily},sans-serif;
                 }`}</style>
             <QueryClientProvider client={queryClient}>
-                <HydrationBoundary state={pageProps.dehydratedState}>
-                    <AuthContextProvider>
-                    <ModalContextProvider>
-                    <div id={'portal'}></div>
-                    <Layout>
-                        <Component {...pageProps} />
-                        <ToastContainer autoClose={10000} hideProgressBar={true} draggable={false} position={"top-right"} theme={"light"} closeOnClick={true}/>
-                    </Layout>
-                    </ModalContextProvider>
-                    </AuthContextProvider>
-                </HydrationBoundary>
+                <BasketContextProvider>
+                    <HydrationBoundary state={pageProps.dehydratedState}>
+                        <AuthContextProvider>
+                            <ModalContextProvider>
+                                <div id={'portal'}></div>
+                                <Layout>
+                                    <Component {...pageProps} />
+                                    <ToastContainer autoClose={10000} hideProgressBar={true} draggable={false} position={"top-right"} theme={"light"} closeOnClick={true}/>
+                                </Layout>
+                            </ModalContextProvider>
+                        </AuthContextProvider>
+                    </HydrationBoundary>
+                </BasketContextProvider>
             </QueryClientProvider>
         </>
     )
