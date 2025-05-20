@@ -7,13 +7,22 @@ import { useModal} from "@/store";
 import {useUser} from "@/store/AuthContext";
 import {toast} from "react-toastify";
 import {BasketContext} from "@/store/basketContext";
+import {useBasket} from "@/hooks/use-basket";
 
 export function Header() {
+   const {basketItems}= useBasket()
+
+    console.log('basketItems',basketItems)
+
+    //const basket=useContext(BasketContext);
+
     const{isLogin, logout}=useUser()
+
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
-    const basket=useContext(BasketContext);
 
     const {currentModal,openModal,closeModal} = useModal();
+
+
 
     const menuBtnClickHandler=(e:MouseEvent)=>{
         e.stopPropagation();
@@ -61,7 +70,7 @@ export function Header() {
                         <li className="flex gap-2 cursor-pointer">
                             <IconBox icon={"icon-shopping-cart"} size={24} title={"Card"} link={"#"}
                                      hideTitleOnMobile={true} titleClassName={"text-medium text-gray-500 font-lato "}
-                                     badge={basket.basketItems.length}/>
+                                     badge={basketItems.length}/>
                         </li>
                     </ul>
                     <button onClick={menuBtnClickHandler} id="menu_btn"

@@ -1,10 +1,20 @@
 import axios from "axios";
 import {toast} from "react-toastify";
+import {request} from "node:http";
 
 
 const apiClient=axios.create({
     baseURL: "https://nest.navaxcollege.com/api",
     timeout: 120000,
+})
+
+apiClient.interceptors.request.use(function (request){
+const token=window.localStorage.getItem("token");
+
+if(token){
+    request.headers.Authorization = `Bearer ${token}`;
+}
+    return request;
 })
 
 apiClient.interceptors.response.use(function (response){

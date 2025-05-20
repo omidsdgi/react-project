@@ -37,7 +37,7 @@ export function LoginModal({onClose}: Props) {
 
     return (
         <Modal title={'login'} closeModal={onClose}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} >
                 <Input register={register('identifier', {required: 'لطفا نام خود را وارد نمایید'})} label={'userName'}
                        errors={errors} {...{placeholder: 'Enter your username'}}/>
                 <Input register={register('password', {
@@ -48,7 +48,7 @@ export function LoginModal({onClose}: Props) {
 
                 <button className={'mt-2 bg-green-400 font-bold py-2 px-4 rounded'}>Submit</button>
             </form>
-            <span onClick={() => openModal('register')}> go to register modal</span>
+            <span className={'cursor-pointer mt-8 inline-block'} onClick={() => openModal('register')}>  to register modal</span>
         </Modal>
 
     );
