@@ -20,7 +20,7 @@ export function LoginModal({onClose}: Props) {
 
     const {openModal,closeModal} = useModal();
 
-    const {login}=useUser()
+    const {Login}=useUser()
       const {register,handleSubmit,formState:{errors}}=useForm<FormData>()
 
     const mutate=useMutation({mutationFn:loginApiCall})
@@ -28,7 +28,7 @@ export function LoginModal({onClose}: Props) {
     const onSubmit=(data:FormData)=>{
        mutate.mutate(data, {onSuccess:(response)=>{
                console.log('login',response)
-           login(response.jwt, response.user)
+           Login(response.jwt, response.user)
                toast.success('با موفقیت وارد حساب کاربری خود شدید')
                closeModal()
            }});

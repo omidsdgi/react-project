@@ -35,6 +35,7 @@ apiClient.interceptors.response.use(function (response){
     }
     else if(error.response.status == 403){
         toast.error('شما دسترسی به این منابع ندارید.')
+        console.log("Server response", error.response.data);
     }
     else {
         toast.error('خطای نامعلوم.')

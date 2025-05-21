@@ -20,7 +20,7 @@ interface Props {
 
 export function RegisterModal({onClose,}: Props) {
     const {closeModal} = useModal();
-    const {login}=useUser()
+    const {Login}=useUser()
 
     const {register,handleSubmit,formState:{errors}}=useForm<FormData>()
 
@@ -28,7 +28,7 @@ export function RegisterModal({onClose,}: Props) {
 
     const onSubmit=(data:FormData)=>{
         mutate.mutate(data, {onSuccess:(response)=>{
-                login(response.jwt, response.user)
+                Login(response.jwt, response.user)
                 toast.success('با موفقیت وارد حساب کاربری خود شدید')
                 closeModal()
             }})
