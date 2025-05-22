@@ -1,6 +1,8 @@
 import apiClient from "@/api/config/ApiClient";
 import {ApiResponseSingleType, ApiResponseType} from "@/types";
 import {BasketType} from "@/types/api/basket";
+import {getAllProductsApiCall} from "@/api/prodoct";
+import {ProductType} from "@/types/api/Product";
 
  export interface UpdateBasketData{
     basket_items:Array<{
@@ -12,11 +14,45 @@ import {BasketType} from "@/types/api/basket";
 }
 
 export async function basketApiCall():Promise<ApiResponseSingleType<BasketType>> {
-    return await apiClient.get('/my-basket')
+
+     const token=window.localStorage.getItem('token')
+     const uuid=window.localStorage.getItem('uuid')
+
+    if(!token && !uuid){
+        const response:ApiResponseSingleType<BasketType>=await apiClient.post('/my-basket');
+        window.localStorage.setItem('uuid',response.data.attributes.uuid)
+        return response;
+    }
+
+
+if (uuid){
+    return await apiClient.get('/my-basket',{
+        params:{
+            uuid:uuid
+        }
+    })
+}
+return await apiClient.get('/my-basket')
+
 }
 
-export async function updateBasketApiCall(data:UpdateBasketData) {
-    return await apiClient.put('/my-basket',{
-        data:data
-    })
+export async function updateBasketApiCall(data:UpdateBasketData):Promise<ApiResponseSingleType<BasketType>> {
+    const uuid = window.localStorage.getItem('uuid')
+    if (uuid) {
+        return await apiClient.put('/my-basket', {
+            data: data
+        }, {
+            params: {
+                uuid: uuid
+            }
+
+        })
+    }
+return await apiClient.put('/my-basket', {
+    data: data
+})
+}
+
+export async function UUID2UserApiCall(uuid:string):Promise<ApiResponseSingleType<BasketType>> {
+     return await apiClient.put('/my-basket'+uuid)
 }

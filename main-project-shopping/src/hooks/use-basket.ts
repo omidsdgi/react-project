@@ -1,5 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {basketApiCall, updateBasketApiCall, UpdateBasketData} from "@/api/basket";
+import {basketApiCall, updateBasketApiCall, UpdateBasketData, UUID2UserApiCall} from "@/api/basket";
 import {BasketItemType} from "@/types/api/basket";
 
 export function useBasket  () {
@@ -8,6 +8,11 @@ export function useBasket  () {
     const {data: basketData} = useQuery({queryKey: ['get-basket'], queryFn: basketApiCall})
 
     const mutate= useMutation({mutationFn:updateBasketApiCall})
+    const mutateUUID2User=useMutation({mutationFn:UUID2UserApiCall,onSuccess:(response)=>{
+        window.localStorage.removeItem("uuid");
+            queryClient.invalidateQueries({queryKey:['get-basket']})
+    }})
+
 
     const basketItems=basketData?.data.attributes.basket_items ??[]
 
@@ -54,9 +59,9 @@ export function useBasket  () {
         prepareUpdateData =prepareUpdateData.map((item)=>{
         if(item.product.connect[0].id === productId){
             if(type === "increase"){
-                item.quantity += item.quantity
+                item.quantity = item.quantity +1
             }else if(type === "decrease"){
-                item.quantity -= item.quantity
+                item.quantity = item.quantity -1
             }
         }
         return item;
@@ -76,5 +81,21 @@ export function useBasket  () {
 
     }
 
-    return {basketItems:basketItems,addItem:addItemHandler,updateItem:updateItemHandler,getItem:getItemHandler};
+    const uuid2userHandler=()=>{
+        const token=window.localStorage.getItem('token')
+        const uuid=window.localStorage.getItem('uuid')
+
+        if(token && uuid){
+            if (basketItems.length > 0){
+            mutateUUID2User.mutate(uuid)
+                console.log('uuid',uuid)
+                }
+            }else {
+                window.localStorage.removeItem('uuid')
+            queryClient.invalidateQueries({queryKey:['get-basket']})
+            }
+
+    }
+
+    return {basketItems:basketItems,addItem:addItemHandler,updateItem:updateItemHandler,getItem:getItemHandler,uuid2user:uuid2userHandler}
 }

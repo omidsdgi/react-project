@@ -7,9 +7,10 @@ import {registerApiCall} from "@/api/Auth";
 import {useUser} from "@/store/AuthContext";
 import {toast} from "react-toastify";
 import {useModal} from "@/store";
+import {useBasket} from "@/hooks/use-basket";
 
 interface FormData {
-    userName: string;
+    username: string;
     password: string;
     email: string;
 }
@@ -20,6 +21,8 @@ interface Props {
 
 export function RegisterModal({onClose,}: Props) {
     const {closeModal} = useModal();
+
+    const{uuid2user} = useBasket();
     const {Login}=useUser()
 
     const {register,handleSubmit,formState:{errors}}=useForm<FormData>()
@@ -28,9 +31,12 @@ export function RegisterModal({onClose,}: Props) {
 
     const onSubmit=(data:FormData)=>{
         mutate.mutate(data, {onSuccess:(response)=>{
+                console.log('register',response)
                 Login(response.jwt, response.user)
+
                 toast.success('با موفقیت وارد حساب کاربری خود شدید')
                 closeModal()
+                uuid2user()
             }})
 
     }
@@ -38,7 +44,7 @@ export function RegisterModal({onClose,}: Props) {
     return (
         <Modal title={'register'} closeModal={onClose}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Input register={register('userName',   {required: 'لطفا نام خود را وارد نمایید'})} label={'userName'} errors={errors} {...{placeholder:'Enter your username'}}/>
+                <Input register={register('username',   {required: 'لطفا نام خود را وارد نمایید'})} label={'userName'} errors={errors} {...{placeholder:'Enter your username'}}/>
                 <Input register={register('email',      {required: 'Please enter your email'})} errors={errors} label={'email'} type={'email'} {...{placeholder:'Enter your username'}}/>
                 <Input register={register('password',   {required: 'Please enter your password',minLength: {value: 3, message: 'min 3 characters'},maxLength: {value: 10, message: 'max 10 characters'}})} errors={errors} type={'password'} label={'Password'} {...{placeholder:'Enter your username'}}/>
 
