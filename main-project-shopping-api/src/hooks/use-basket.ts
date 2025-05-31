@@ -88,7 +88,6 @@ export function useBasket  () {
         if(token && uuid){
             if (basketItems.length > 0){
             mutateUUID2User.mutate(uuid)
-                console.log('uuid',uuid)
                 }
             }else {
                 window.localStorage.removeItem('uuid')
