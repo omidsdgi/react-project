@@ -1,6 +1,5 @@
 import {Product} from "@/types/Products";
 import {Response} from "@/types/Response";
-import axios from "axios";
 import apiClient from "@/api/config/ApiClient";
 
 interface Props {
@@ -11,23 +10,14 @@ interface Props {
 
 
 export async function getAllProducts():Promise<Response<Product>> {
-    let response = await fetch("http://localhost:1337/api/products?populate=*");
+    const response = await apiClient.get("/products")
+   return response.data;
+}
 
-    if(response.status === 404){
-        throw Error(`Not Found`)
-    }
-
-    if (response.status===401){
-        throw Error(`Not Authorized`)
-    }
-    if (response.status===400){
-        throw Error(`Not Validation`)
-    }
-
-    if (response.status ===403){
-        throw Error(`Not Forbidden`)
-    }
-    return response.json()
+export async function deleteProduct({productId}:{productId:number}) {
+    const response = await apiClient.delete(`/products/${productId}`);
+    console.log('delete', response);
+    return response.data;
 }
 
 export async function getProductsOfCategory({categoryId,page}:{categoryId:number,page:number}):Promise<Response<Product>> {
@@ -37,7 +27,7 @@ export async function getProductsOfCategory({categoryId,page}:{categoryId:number
       url:`/products`,
       params:{
           "pagination[page]":page,
-          "pagination[pageSize]":25,
+          "pagination[pageSize]":5,
           "filters[category]":categoryId,
           "populate":"*"
       }
