@@ -5,6 +5,13 @@ const apiClient=axios.create({
     baseURL:"http://localhost:1337/api",
     timeout:120000,
 })
+apiClient.interceptors.request.use
+(function (config) {
+    const token=config.headers.Authorization = localStorage.getItem("token");
+    if(token)
+       config.headers.Authorization = "Bearer "+ token;
+    return config;
+})
 
 apiClient.interceptors.response.use
 (function (response){

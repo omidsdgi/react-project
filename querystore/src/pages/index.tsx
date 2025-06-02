@@ -17,6 +17,7 @@ import {
     Paper,
 } from '@mui/material';
 import {toast} from "react-toastify";
+import Login from "@/components/auth/Login";
 
 export default function Home() {
 
@@ -40,7 +41,8 @@ export default function Home() {
         queryKey: ["product_of_category", selectedCategory, page],
         queryFn: () => {
             return getProductsOfCategory({categoryId: selectedCategory, page: page})
-        }, enabled: selectedCategory !== 0
+        }, enabled: selectedCategory !== 0,
+        retry: false
     })
 
     const mutation = useMutation({mutationFn: createProduct})
@@ -117,7 +119,17 @@ export default function Home() {
                         bgcolor: 'background.paper',
                     }}
                 >
+                    <Login/>
                     {/* لیست دسته‌بندی‌ها */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                           margin:"20px"
+                        }}
+                    >
                     {Array.isArray(categoryData?.data) && categoryData.data.length > 0 && (
                         <>
                             <Typography variant="h6" gutterBottom>
@@ -128,7 +140,7 @@ export default function Home() {
                                     <ListItem key={category.id} disablePadding>
                                         <ListItemButton
                                             onClick={() => {
-                                                setSelectedCategory(category.id);
+                                                setSelectedCategory(Number(category.id));
                                                 setPage(1);
                                             }}
                                         >
@@ -139,6 +151,7 @@ export default function Home() {
                             </List>
                         </>
                     )}
+                    </Box>
 
                     {/* فرم ثبت محصول */}
                     <Box component="form" onSubmit={onSubmit} sx={{mt: 3}}>
