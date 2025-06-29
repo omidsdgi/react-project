@@ -1,6 +1,5 @@
  import React from "react";
  import {twMerge} from "tailwind-merge";
- import {Banner} from "@/components";
 
 interface Props {
     className?: string;
@@ -9,7 +8,7 @@ interface Props {
 
 export function Section({className='',children}: Props) {
     return (
-       <section className={'container'}>
+       <section className={twMerge('container mb-[68px]', className)}>
            {children}
        </section>
     );

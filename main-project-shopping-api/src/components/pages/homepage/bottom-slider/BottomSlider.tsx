@@ -1,14 +1,12 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay} from "swiper/modules";
-import {ProductDealsCard, ProductVerticalList, SimpleProductCard} from "@/components";
-import {RecentlyAddedMock} from "@/mock/RecentlyAdded";
+import { ProductVerticalList} from "@/components";
 import {useQuery} from "@tanstack/react-query";
 import {ApiResponseType} from "@/types";
 import {ProductType} from "@/types/api/Product";
 import {getAllProductsApiCall} from "@/api/prodoct";
 import {InView} from "react-intersection-observer";
-import entry from "next/dist/server/typescript/rules/entry";
-import {refreshReducer} from "next/dist/client/components/router-reducer/reducers/refresh-reducer";
+
 
 interface Props {
 

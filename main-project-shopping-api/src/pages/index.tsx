@@ -39,7 +39,7 @@ export default function Home() {
 
     return (
         <>
-            <Section>
+            <Section className={'mb-[76px]'}>
                 <Banner  title={"Don’t miss amazing grocery deals"}
                          subtitle={"Sign up for the daily newsletter"}
                          image={"/assets/images/fresh-apples.png"}

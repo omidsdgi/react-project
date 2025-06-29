@@ -62,7 +62,7 @@ export function Footer() {
                     <IconBox icon={"icon-down-dark inline-block sm:hidden"} size={24}/>
                     </div>
                     <ul className="hidden md:flex flex-col gap-2.5">
-                        <li className="font-lato text-medium text-blue-300 mt-4 lg:mt-6"><a href="#">About Us</a></li>
+                        <li className="font-lato text-medium text-blue-300 mt-4 lg:mt-6"><a href="/about-us">About Us</a></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Delivery Information</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Privacy Policy</Link></li>
                         <li className="font-lato text-medium text-blue-300"><Link href="#">Terms & Conditions</Link></li>

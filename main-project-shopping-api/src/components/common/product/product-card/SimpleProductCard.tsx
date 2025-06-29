@@ -1,8 +1,7 @@
-import {Badge, IconBox, ImageView, Rating} from "@/components";
+import {Badge, IconBox, ImageView, ProductCardBottom, Rating} from "@/components";
 import Link from "next/link";
 import {EntityType} from "@/types";
 import {ProductType} from "@/types/api/Product";
-import {ProductCardBottom} from "@/components/common/product/product-card/ProductCardBottom";
 
 interface Props{
     data:EntityType<ProductType>

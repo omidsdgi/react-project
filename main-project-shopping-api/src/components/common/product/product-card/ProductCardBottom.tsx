@@ -1,9 +1,7 @@
 import {EntityType} from "@/types";
 import {ProductType} from "@/types/api/Product";
 import {IconBox} from "@/components";
-import React, {useContext, useState} from "react";
-import {BasketContext} from "@/store/basketContext";
-import {func} from "ts-interface-checker";
+import React  from "react";
 import {useBasket} from "@/hooks/use-basket";
 
 interface Props {
