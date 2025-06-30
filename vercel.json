@@ -1,16 +1,6 @@
 {
   "version": 2,
   "name": "main-project-shopping",
-  "builds": [
-    {
-      "src": "main-project-shopping-api/next.config.js",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "main-project-shopping-api/$1"
-    }
-  ]
+  "root": "main-project-shopping-api"
 }
+
